@@ -1,16 +1,25 @@
 cmake_minimum_required(VERSION 3.30)
 project(Exercises)
 
-include(FetchContent)
 
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
-)
-FetchContent_MakeAvailable(googletest)
 
-FetchContent_Declare(
-  benchmark
-  URL https://github.com/google/benchmark/archive/refs/tags/v1.9.5.tar.gz
-)
-FetchContent_MakeAvailable(benchmark)
+find_package(benchmark 1.9 QUIET)
+if (NOT benchmark_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    benchmark
+    GIT_REPOSITORY https://github.com/google/benchmark
+    GIT_TAG main)
+  option(BENCHMARK_ENABLE_TESTING "" OFF)
+  option(BENCHMARK_ENABLE_GTEST_TESTS "" OFF)
+  option(BENCHMARK_ENABLE_LIBPFM "" ON) # for performance counters
+  FetchContent_MakeAvailable(benchmark)
+endif()
+
+set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(test test.cpp)
+target_link_libraries(test PRIVATE benchmark::benchmark)
+
+
