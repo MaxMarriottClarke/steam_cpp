@@ -1,0 +1,4 @@
+CompileFlags:
+ Add:
+   - --gcc-toolchain=/path/to/gcc-16
+

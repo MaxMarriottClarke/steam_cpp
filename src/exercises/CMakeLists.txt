@@ -22,4 +22,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(test test.cpp)
 target_link_libraries(test PRIVATE benchmark::benchmark)
 
+add_subdirectory(histograms)
 
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
