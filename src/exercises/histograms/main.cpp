@@ -3,16 +3,53 @@
 #include <random>
 #include <print>
 
+
+const int n_bins = 21;
+const int n = 1000;
+
+struct histo_data {
+  int index;
+  int number;
+  float edge;
+};
+
+void histo(const std::vector<float>& data, const int n_bins) {
+  const auto max_val = *max_element(data.begin(), data.end());
+  const auto min_val = *min_element(data.begin(), data.end());
+
+  const auto bin_width = (max_val - min_val) / n_bins;
+  std::vector<histo_data> bin_edges;
+  bin_edges.reserve(n_bins);
+
+  for (int i = 0; i < n_bins; i++) {
+    float b_edge = min_val + i * bin_width;
+    histo_data entry = {i, 0, b_edge};
+    bin_edges.push_back(entry);
+
+  }
+
+  for (const auto& val : data) {
+      const int bin_idx = std::min(
+          static_cast<int>((val - min_val) / bin_width),
+          n_bins - 1
+      );
+      std::println("{}", bin_idx);
+      bin_edges[bin_idx].number++;
+  }
+
+  for (const auto& entry : bin_edges) {
+      std::println("{}", std::string(entry.number, '#'));
+  }
+
+
+}
+
+
+
+
+
+
 int main () {
-
-
-  // Allow user to input N
-  int n;
-  std::println("Number of samples to produce, N =");
-  std::cin >> n;
-
-  if (!std::cin || n < 0) return 1;
-
 
   // initialise the memory
   std::vector<float> data;
@@ -27,9 +64,15 @@ int main () {
 
   for (int i = 0; i < n; i++) {
     auto entry = norm(rne);
-    data.emplace_back(entry);
-    std::println("{}", entry);
+    data.push_back(entry);
+
   }
+
+  histo(data, n_bins);
+
+
+
+
 
 
 
