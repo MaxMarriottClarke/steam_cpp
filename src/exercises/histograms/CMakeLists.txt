@@ -1,2 +1,2 @@
-add_executable(hist main.cpp)
+add_executable(histo main.cpp histogram.cpp)
 
