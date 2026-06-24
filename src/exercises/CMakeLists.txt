@@ -26,4 +26,5 @@ target_link_libraries(test PRIVATE benchmark::benchmark)
 add_subdirectory(histograms)
 
 
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

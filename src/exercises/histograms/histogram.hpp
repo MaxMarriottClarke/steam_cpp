@@ -11,7 +11,7 @@ struct histo_data {
 
 class histogram {
   public:
-    histogram(const int n_points, const int n_bins, const float dist_mean, const float dist_std);
+    histogram(int n_points, int n_bins, float dist_mean, float dist_std);
 
     void make_random_data();
 
@@ -20,12 +20,12 @@ class histogram {
     void plot_hist();
 
   private:
+    std::vector<float> m_rdm_data;
+    std::vector<histo_data> m_bin_edges;
     int m_n_points;
     int m_n_bins;
     float m_dist_mean;
     float m_dist_std;
-    std::vector<float> m_rdm_data;
-    std::vector<histo_data> m_bin_edges;
 
 };
     

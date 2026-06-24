@@ -4,7 +4,7 @@ constexpr auto n_bins = 21;
 constexpr auto n = 100000;
 
 constexpr auto mean = 0.0f;
-constexpr auto deviation = 1.0f;
+constexpr auto deviation = 10.0f;
 
 int main () {
 

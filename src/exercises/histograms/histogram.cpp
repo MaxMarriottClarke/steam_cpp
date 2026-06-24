@@ -5,8 +5,8 @@
 #include "histogram.hpp"
 
 
-histogram::histogram(const int n_points, const int n_bins,
-                     const float dist_mean, const float dist_std)
+histogram::histogram(int n_points, int n_bins,
+                     float dist_mean, float dist_std)
     : m_n_points(n_points), m_n_bins(n_bins),
       m_dist_mean(dist_mean), m_dist_std(dist_std) {}
 
@@ -43,7 +43,7 @@ void histogram::bin_hist() {
  
  }
  
- for (const auto& val : m_rdm_data) {
+ for (auto val : m_rdm_data) {
      const auto bin_idx = std::min(
          static_cast<int>((val - min_val) / bin_width),
          m_n_bins - 1
